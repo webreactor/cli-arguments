@@ -23,6 +23,18 @@ class ArgumentsParser {
         );
     }
 
+    public function setDefinitions($definitions) {
+        foreach ($definitions as $definition) {
+            $this->setDefinition(
+                $description['name'],
+                $description['short_name'],
+                $description['repeated'],
+                $description['description'],
+                $description['default'],
+            );
+        }
+    }
+
     public function parse($args) {
         $this->arguments = $this->extractArguments($args);
     }
