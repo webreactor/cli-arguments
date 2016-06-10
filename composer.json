@@ -1,0 +1,9 @@
+{
+    "name": "webreactor/cli-arguments",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Webreactor\\CliArguments": "src/",
+        }
+    }
+}
