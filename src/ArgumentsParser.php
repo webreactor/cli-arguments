@@ -30,7 +30,7 @@ class ArgumentsParser {
                 $description['short_name'],
                 $description['repeated'],
                 $description['description'],
-                $description['default'],
+                $description['default']
             );
         }
     }
