@@ -121,6 +121,7 @@ class ArgumentsParser {
             } else {
                 if ($key !== false) {
                     $data[$key][] = $word;
+                    $key = false;
                 } else {
                     $data['_words_'][] = $word;
                 }
