@@ -37,9 +37,9 @@ class ArgumentsParser {
 
     public function updateDefaults($values) {
         foreach ($this->definitions as $key => $line) {
-            $name = $line[0];
+            $name = $line['name'];
             if (isset($values[$name])) {
-                $this->definitions[4] = $values[$name];
+                $this->definitions['default'] = $values[$name];
             }
         }
     }
