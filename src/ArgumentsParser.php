@@ -39,7 +39,7 @@ class ArgumentsParser {
         foreach ($this->definitions as $key => $line) {
             $name = $line['name'];
             if (isset($values[$name])) {
-                $this->definitions['default'] = $values[$name];
+                $this->definitions[$key]['default'] = $values[$name];
             }
         }
     }
