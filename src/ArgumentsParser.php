@@ -35,6 +35,15 @@ class ArgumentsParser {
         }
     }
 
+    public function updateDefaults($values) {
+        foreach ($this->definitions as $key => $line) {
+            $name = $line[0];
+            if (isset($values[$name])) {
+                $this->definitions[4] = $values[$name];
+            }
+        }
+    }
+
     public function parse($args) {
         $this->arguments = $this->extractArguments($args);
     }
@@ -109,13 +118,17 @@ class ArgumentsParser {
                     $key = false;
                 } else {
                     $key = $keys[0];
-                    // if next is another key, treat current as boolean
+                    // if next is another key or current is last one
+                    // treat current as boolea
                     if (isset($raw[$i + 1])) {
                         $next = $raw[$i + 1];
                         if ($this->parseKeys($next) !== false) {
                             $data[$key][] = true;
                             $key = false;
                         }
+                    } else {
+                        $data[$key][] = true;
+                        $key = false;
                     }
                 }
             } else {
