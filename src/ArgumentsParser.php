@@ -23,6 +23,10 @@ class ArgumentsParser {
         );
     }
 
+    public function reset() {
+        $this->definitions = array();
+    }
+
     public function addDefinitions($definitions) {
         foreach ($definitions as $definition) {
             $this->setDefinition(
