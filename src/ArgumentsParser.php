@@ -13,7 +13,7 @@ class ArgumentsParser {
         $this->definitions = $definitions;
     }
 
-    public function setDefinition($name, $short_name, $default = false, $repeated = false, $description = '') {
+    public function addDefinition($name, $short_name, $default = false, $repeated = false, $description = '') {
         $this->definitions[$name] = array(
             'name' => $name,
             'short_name' => $short_name,
@@ -23,7 +23,7 @@ class ArgumentsParser {
         );
     }
 
-    public function setDefinitions($definitions) {
+    public function addDefinitions($definitions) {
         foreach ($definitions as $definition) {
             $this->setDefinition(
                 $description['name'],
@@ -35,23 +35,25 @@ class ArgumentsParser {
         }
     }
 
-    public function updateDefaults($values) {
-        foreach ($this->definitions as $key => $line) {
-            $name = $line['name'];
-            if (isset($values[$name])) {
-                $this->definitions[$key]['default'] = $values[$name];
-            }
-        }
-    }
-
     public function parse($args) {
         $this->arguments = $this->extractArguments($args);
     }
 
     public function getAll() {
         $arguments = array();
-        foreach ($this->definitions as $key => $value) {
+        foreach ($this->definitions as $key => $definition) {
             $arguments[$key] = $this->get($key);
+        }
+        return $arguments;
+    }
+
+    public function getReal() {
+        $arguments = array();
+        foreach ($this->definitions as $key => $definition) {
+            $value = $this->tryGetArgument($key);
+            if ($value !== null) {
+                $arguments[$key] = $value;
+            }
         }
         return $arguments;
     }
@@ -62,12 +64,18 @@ class ArgumentsParser {
         }
         $definition = $this->definitions[$name];
         if (isset($this->arguments[$name])) {
-            return $this->arguments[$name];
+            $value = $this->arguments[$name];
+        } else {
+            if (isset($this->arguments[$definition['short_name']])) {
+                $value = $this->arguments[$definition['short_name']];
+            } else {
+                return null;
+            }
         }
-        if (isset($this->arguments[$definition['short_name']])) {
-            return $this->arguments[$definition['short_name']];
+        if ($definition['repeated']) {
+            return $value;
         }
-        return null;
+        return $value[0];
     }
 
     public function get($name) {
@@ -76,13 +84,9 @@ class ArgumentsParser {
         }
         $value = $this->tryGetArgument($name);
         if ($value === null){
-            $value = $this->getDefault($name);
+            return $this->getDefault($name);
         }
-        $definition = $this->definitions[$name];
-        if ($definition['repeated']) {
-            return $value;
-        }
-        return $value[0];
+        return $value;
     }
 
     public function getDefault($name) {
@@ -93,11 +97,13 @@ class ArgumentsParser {
         if ($definition['default'] === null) {
             if ($definition['repeated']) {
                 return array();
-            } else {
-                return array(null);
             }
+            return null;
         } else {
-            return (array)$definition['default'];
+            if ($definition['repeated']) {
+                return (array)$definition['default'];
+            }
+            return $definition['default'];
         }
     }
 
