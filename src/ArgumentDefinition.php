@@ -9,16 +9,16 @@ class ArgumentDefinition {
         $short,
         $default,
         $is_flag,
-        $description,
-        $repeated;
+        $repeated,
+        $description;
 
-    public function __construct($name, $short = '', $description = '', $default = null, $is_flag = false, $repeated = false) {
+    public function __construct($name, $short = '', $default = null, $is_flag = false, $repeated = false, $description = '') {
         $this->name = $name;
         $this->short = $short;
         $this->default = $default;
         $this->is_flag = $is_flag;
-        $this->description = $description;
         $this->repeated = $repeated;
+        $this->description = $description;
     }
 
 }

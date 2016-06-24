@@ -13,11 +13,11 @@ $raw_args = explode(
 
 $ar = new ArgumentsParser($raw_args);
 
-$ar->addDefinition(new ArgumentDefinition('test', 't', 'test parameter', null, false, false));
-$ar->addDefinition(new ArgumentDefinition('sss', 's', 'test2 parameter', 'value', false, false));
-$ar->addDefinition(new ArgumentDefinition('ddd', 'd', 'test3 parameter', 'value', true, false));
-$ar->addDefinition(new ArgumentDefinition('vvv', 'v', 'test5 parameter', true, true, true));
-$ar->addDefinition(new ArgumentDefinition('eee', 'e', 'test4 parameter', 'true', false, true));
+$ar->addDefinition(new ArgumentDefinition('test', 't', null, false, false, 'test parameter'));
+$ar->addDefinition(new ArgumentDefinition('sss', 's', 'value', false, false, 'test2 parameter'));
+$ar->addDefinition(new ArgumentDefinition('ddd', 'd', 'value', true, false, 'test3 parameter'));
+$ar->addDefinition(new ArgumentDefinition('vvv', 'v', true, true, true, 'test5 parameter'));
+$ar->addDefinition(new ArgumentDefinition('eee', 'e', 'true', false, true, 'test4 parameter'));
 $ar->parse();
 //print_r($ar);
 $parsed = $ar->getAll();
