@@ -1,6 +1,6 @@
 <?php
 
-namespace Webreactor\CliArguments;
+namespace Reactor\CliArguments;
 
 include 'vendor/autoload.php';
 
