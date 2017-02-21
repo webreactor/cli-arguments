@@ -1,5 +1,18 @@
 # cli-arguments
 
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/webreactor/cli-arguments.git"
+        }
+    ],
+    "require": {
+        "webreactor/cli-arguments": "v0.0.2",
+        "symfony/yaml": "v2.7.3"
+    }
+}
 ```
 
 use Reactor\CliArguments\ArgumentDefinition;
