@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "webreactor/cli-arguments": "v0.0.2",
+        "webreactor/cli-arguments": "v0.1.0",
         "symfony/yaml": "v2.7.3"
     }
 }
