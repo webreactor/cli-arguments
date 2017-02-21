@@ -15,6 +15,7 @@
 }
 ```
 
+```php
 use Reactor\CliArguments\ArgumentDefinition;
 use Reactor\CliArguments\ArgumentsParser;
 
